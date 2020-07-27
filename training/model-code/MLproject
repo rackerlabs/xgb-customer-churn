@@ -1,0 +1,11 @@
+name: tutorial
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      train: {type: path}
+      validation: {type: path}
+      model_dir: {type: path}
+    command: "python train.py --train {train} --validation {validation} --model-dir {model_dir}"

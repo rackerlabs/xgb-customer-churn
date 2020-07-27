@@ -1,0 +1,45 @@
+Name: XGBoost Customer Churn
+CanonicalName: customer-churn
+MLProject: training/model-code/MLProject
+Requirements: training/model-code/conda.yaml
+NotebookFile: training/model-code/customer-churn.ipynb
+DependencyManagement: conda
+InferenceType: realtime
+Team:
+  - Name: Name
+    Email: email@email.com
+Tags:
+  Team: AI
+  Owner: Model Factory
+Development:
+  TrackingUri: http://iday-demo-dev-lb-6a0d51598d4ed16c.elb.us-east-1.amazonaws.com:5000/
+  Training:
+    ResourceConfig:
+      InstanceType: ml.m4.xlarge
+      InstanceCount: 1
+    StoppingCondition:
+      MaxRuntimeInSeconds: 3000
+      MaxWaitTimeInSeconds: 3000
+    EnableManagedSpotTraining: true
+    Parameters:
+      train: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/train/
+      validation: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/validation/
+      model_dir: /opt/ml/model
+    InputDataConfig:
+      - ChannelName: train
+        DataSource:
+          S3DataSource:
+            S3Uri: s3://onica-ai-dev-codepipeline-db1f6410/diabetes/onica-ai-dev-diabetes-ci/
+            S3DataDistributionType: FullyReplicated
+            S3DataType: S3Prefix
+        CompressionType: None
+        InputMode: File
+    OutputDataConfig:
+      S3OutputPath: s3://onica-ai-dev-codepipeline-db1f6410/diabetes/onica-ai-dev-diabetes-ci/
+  Inference:
+    Mode: replace
+    ResourceConfig:
+      InstanceType: ml.m4.xlarge
+      InstanceCount: 1
+    Environment:
+      GUNICORN_CMD_ARGS: --workers=1
