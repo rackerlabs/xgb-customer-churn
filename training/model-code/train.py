@@ -11,18 +11,18 @@ def parse_args():
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--max_depth", type=int, default=5)
+    parser.add_argument("--max-depth", type=int, default=5)
     parser.add_argument("--eta", type=float, default=0.2)
     parser.add_argument("--gamma", type=int, default=4)
-    parser.add_argument("--min_child_weight", type=int, default=6)
+    parser.add_argument("--min-child-weight", type=int, default=6)
     parser.add_argument("--subsample", type=float, default=0.8)
     parser.add_argument("--silent", type=int, default=0)
     parser.add_argument("--objective", type=str, default="binary:logistic")
-    parser.add_argument("--num_round", type=int, default=50)
-    parser.add_argument("--smdebug_path", type=str, default=None)
-    parser.add_argument("--smdebug_frequency", type=int, default=1)
-    parser.add_argument("--smdebug_collections", type=str, default='metrics')
-    parser.add_argument("--output_uri", type=str, default="/opt/ml/output/tensors",
+    parser.add_argument("--num-round", type=int, default=50)
+    parser.add_argument("--smdebug-path", type=str, default=None)
+    parser.add_argument("--smdebug-frequency", type=int, default=1)
+    parser.add_argument("--smdebug-collections", type=str, default='metrics')
+    parser.add_argument("--output-uri", type=str, default="/opt/ml/output/tensors",
                         help="S3 URI of the bucket where tensor data will be stored.")
 
     parser.add_argument('--train', type=str, default=os.environ.get('SM_CHANNEL_TRAIN'))
