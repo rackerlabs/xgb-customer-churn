@@ -1,10 +1,6 @@
 import argparse
-import json
 import os
 import pickle
-import random
-import tempfile
-import urllib.request
 import mlflow
 import xgboost
 from smdebug import SaveConfig
@@ -31,7 +27,11 @@ def parse_args():
 
     parser.add_argument('--train', type=str, default=os.environ.get('SM_CHANNEL_TRAIN'))
     parser.add_argument('--validation', type=str, default=os.environ.get('SM_CHANNEL_VALIDATION'))
-    parser.add_argument('--model-dir', type=str, default=os.environ['SM_MODEL_DIR'])
+    parser.add_argument('--model-dir', type=str, default=os.environ.get('SM_MODEL_DIR', '/opt/ml/model'))
+
+    print('\n-------------- Environment Variables -------------\n')
+    for key, value in os.environ.items():
+        print('{}={}'.format(key, value))
 
     args = parser.parse_args()
 
@@ -110,7 +110,7 @@ def main():
         model_location = os.path.join(args.model_dir, 'xgboost-model')
         pickle.dump(model, open(model_location, 'wb'))
 
-        mlflow.xgboost.log_model(model, 'model', 'xgb-customer-churn')
+        mlflow.xgboost.log_model(model, 'model', registered_model_name='xgb-customer-churn')
 
 
 if __name__ == "__main__":
