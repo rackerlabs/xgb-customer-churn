@@ -33,7 +33,7 @@ Development:
       subsample: 0.8
       silent: 0
       objective: "binary:logistic"
-      num_round: 100
+      num_round: 200
     InputDataConfig:
       - ChannelName: train
         DataSource:
@@ -46,7 +46,7 @@ Development:
     OutputDataConfig:
       S3OutputPath: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/output/
   Inference:
-    Mode: replace
+    Mode: create
     Version: v1
     ResourceConfig:
       InstanceType: ml.m4.xlarge
