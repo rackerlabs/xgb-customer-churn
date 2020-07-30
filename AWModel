@@ -12,7 +12,7 @@ Tags:
   Team: AI
   Owner: Model Factory
 Development:
-  TrackingUri: http://iday-demo-dev-lb-6a0d51598d4ed16c.elb.us-east-1.amazonaws.com:5000/
+  TrackingUri: http://iday-demo-dev-lb-d06458ec0c1458ea.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
       InstanceType: ml.m4.xlarge
