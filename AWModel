@@ -45,7 +45,7 @@ Development:
     OutputDataConfig:
       S3OutputPath: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/output/
   Inference:
-    Mode: create
+    Mode: add
     Version: v3
     ResourceConfig:
       InstanceType: ml.m4.xlarge
