@@ -11,6 +11,48 @@ Tags:
   Team: AI
   Owner: Model Factory
 Development:
+  TrackingUri: http://iday-demo-dev-lb-0c747c96f89bcc00.elb.us-east-1.amazonaws.com:5000/
+  Training:
+    ResourceConfig:
+      InstanceType: ml.m4.xlarge
+      InstanceCount: 1
+    StoppingCondition:
+      MaxRuntimeInSeconds: 3000
+      MaxWaitTimeInSeconds: 3000
+    EnableManagedSpotTraining: true
+    Parameters:
+      train: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/train/train.csv
+      validation: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/validation/validation.csv
+      model_dir: /opt/ml/model
+      max_depth: 5
+      eta: 0.2
+      gamma: 4
+      min_child_weight: 6
+      eta: 0.2
+      subsample: 0.8
+      silent: 0
+      objective: "binary:logistic"
+      num_round: 600
+    InputDataConfig:
+      - ChannelName: train
+        DataSource:
+          S3DataSource:
+            S3Uri: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/train/
+            S3DataDistributionType: FullyReplicated
+            S3DataType: S3Prefix
+        CompressionType: None
+        InputMode: File
+    OutputDataConfig:
+      S3OutputPath: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/output/
+  Inference:
+    Mode: add
+    Version: v3
+    ResourceConfig:
+      InstanceType: ml.m4.xlarge
+      InstanceCount: 1
+    Environment:
+      GUNICORN_CMD_ARGS: --workers=1
+Stage:
   TrackingUri: http://iday-demo-stage-lb-832ca9b9455df3f8.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
