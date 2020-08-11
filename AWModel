@@ -11,7 +11,7 @@ Tags:
   Team: AI
   Owner: Model Factory
 Development:
-  TrackingUri: http://iday-demo-dev-lb-0c747c96f89bcc00.elb.us-east-1.amazonaws.com:5000/
+  TrackingUri: http://iday-dev-lb-41b47961848a68d0.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
       InstanceType: ml.m4.xlarge
@@ -21,8 +21,8 @@ Development:
       MaxWaitTimeInSeconds: 3000
     EnableManagedSpotTraining: true
     Parameters:
-      train: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/train/train.csv
-      validation: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/validation/validation.csv
+      train: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
+      validation: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
       model_dir: /opt/ml/model
       max_depth: 5
       eta: 0.2
@@ -37,13 +37,13 @@ Development:
       - ChannelName: train
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/train/
+            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/train/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
         CompressionType: None
         InputMode: File
     OutputDataConfig:
-      S3OutputPath: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/output/
+      S3OutputPath: s3://aiml-terraform-states-iday/xgb-customer-churn/output/
   Inference:
     Mode: add
     Version: v3
@@ -53,7 +53,7 @@ Development:
     Environment:
       GUNICORN_CMD_ARGS: --workers=1
 Stage:
-  TrackingUri: http://iday-demo-stage-lb-832ca9b9455df3f8.elb.us-east-1.amazonaws.com:5000/
+  TrackingUri: http://iday-stage-lb-c85521c54d2c4a29.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
       InstanceType: ml.m4.xlarge
@@ -63,8 +63,8 @@ Stage:
       MaxWaitTimeInSeconds: 3000
     EnableManagedSpotTraining: true
     Parameters:
-      train: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/train/train.csv
-      validation: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/validation/validation.csv
+      train: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
+      validation: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
       model_dir: /opt/ml/model
       max_depth: 5
       eta: 0.2
@@ -79,13 +79,13 @@ Stage:
       - ChannelName: train
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/train/
+            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/train/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
         CompressionType: None
         InputMode: File
     OutputDataConfig:
-      S3OutputPath: s3://aiml-terraform-states-immersion-day/xgb-customer-churn/output/
+      S3OutputPath: s3://aiml-terraform-states-iday/xgb-customer-churn/output/
   Inference:
     Mode: add
     Version: v3
