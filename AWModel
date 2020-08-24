@@ -11,7 +11,7 @@ Tags:
   Team: AI
   Owner: Model Factory
 Development:
-  TrackingUri: http://iday-dev-lb-41b47961848a68d0.elb.us-east-1.amazonaws.com:5000/
+  TrackingUri: http://rax-summit-dev-lb-11121276391df058.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
       InstanceType: ml.m4.xlarge
@@ -21,8 +21,6 @@ Development:
       MaxWaitTimeInSeconds: 3000
     EnableManagedSpotTraining: true
     Parameters:
-      train: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
-      validation: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
       model_dir: /opt/ml/model
       max_depth: 6
       eta: 0.2
@@ -40,6 +38,12 @@ Development:
             S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/train/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
+      - ChannelName: validation
+        DataSource:
+          S3DataSource:
+            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/validation/
+            S3DataDistributionType: FullyReplicated
+            S3DataType: S3Prefix
         CompressionType: None
         InputMode: File
     OutputDataConfig:
@@ -53,7 +57,7 @@ Development:
     Environment:
       GUNICORN_CMD_ARGS: --workers=1
 Stage:
-  TrackingUri: http://iday-stage-lb-c85521c54d2c4a29.elb.us-east-1.amazonaws.com:5000/
+  TrackingUri: http://rax-summit-stage-lb-6af22acb791795e5.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
       InstanceType: ml.m4.xlarge
@@ -63,8 +67,6 @@ Stage:
       MaxWaitTimeInSeconds: 3000
     EnableManagedSpotTraining: true
     Parameters:
-      train: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
-      validation: s3://aiml-terraform-states-iday/xgb-customer-churn/train/train.csv
       model_dir: /opt/ml/model
       max_depth: 5
       eta: 0.2
@@ -80,6 +82,12 @@ Stage:
         DataSource:
           S3DataSource:
             S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/train/
+            S3DataDistributionType: FullyReplicated
+            S3DataType: S3Prefix
+      - ChannelName: validation
+        DataSource:
+          S3DataSource:
+            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/validation/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
         CompressionType: None

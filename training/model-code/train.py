@@ -56,7 +56,7 @@ def main():
     args = parse_args()
     # enable auto logging
     mlflow.xgboost.autolog()
-    train, validation = args.train, args.validation
+    train, validation = '{}/train.csv'.format(args.train), '{}/validation.csv'.format(args.validation)
     parse_csv = "?format=csv&label_column=0"
     dtrain = xgboost.DMatrix(train+parse_csv)
     dval = xgboost.DMatrix(validation+parse_csv)

@@ -6,8 +6,8 @@ entry_points:
   main:
     parameters:
       train: {type: path}
-      validation: {type: path}
-      model_dir: {type: path}
+      validation: {type: string, default: '/opt/ml/input/data/train/train.csv'}
+      model_dir: {type: string, default: '/opt/ml/input/data/validation/validation.csv' }
       max_depth: {type: int, default: 5}
       eta: {type: float, default: 0.2}
       gamma: {type: int, default: 4}
