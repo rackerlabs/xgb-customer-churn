@@ -11,7 +11,6 @@ Tags:
   Team: AI
   Owner: Model Factory
 Development:
-  TrackingUri: http://rax-summit-dev-lb-11121276391df058.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
       InstanceType: ml.m4.xlarge
@@ -57,7 +56,6 @@ Development:
     Environment:
       GUNICORN_CMD_ARGS: --workers=1
 Stage:
-  TrackingUri: http://rax-summit-stage-lb-6af22acb791795e5.elb.us-east-1.amazonaws.com:5000/
   Training:
     ResourceConfig:
       InstanceType: ml.m4.xlarge
