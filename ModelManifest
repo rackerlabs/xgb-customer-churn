@@ -34,13 +34,13 @@ Development:
       - ChannelName: train
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/train/
+            S3Uri: s3://xgb-customer-churn-demo/train/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
       - ChannelName: validation
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/validation/
+            S3Uri: s3://xgb-customer-churn-demo/validation/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
         CompressionType: None
