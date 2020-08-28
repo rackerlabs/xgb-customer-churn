@@ -46,7 +46,7 @@ Development:
         CompressionType: None
         InputMode: File
     OutputDataConfig:
-      S3OutputPath: s3://aiml-terraform-states-iday/xgb-customer-churn/output/
+      S3OutputPath: s3://DEV_ARTIFACT_BUCKET/xgb-customer-churn/output/
   Inference:
     Mode: add
     Version: v3
@@ -91,7 +91,7 @@ Stage:
         CompressionType: None
         InputMode: File
     OutputDataConfig:
-      S3OutputPath: s3://aiml-terraform-states-iday/xgb-customer-churn/output/
+      S3OutputPath: s3://STAGE_ARTIFACT_BUCKET/xgb-customer-churn/output/
   Inference:
     Mode: add
     Version: v3
