@@ -34,19 +34,19 @@ Development:
       - ChannelName: train
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/train/
+            S3Uri: s3://xgb-customer-churn-demo/train/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
       - ChannelName: validation
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/validation/
+            S3Uri: s3://xgb-customer-churn-demo/validation/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
         CompressionType: None
         InputMode: File
     OutputDataConfig:
-      S3OutputPath: s3://aiml-terraform-states-iday/xgb-customer-churn/output/
+      S3OutputPath: s3://DEV_ARTIFACT_BUCKET/xgb-customer-churn/output/
   Inference:
     Mode: add
     Version: v3
@@ -79,19 +79,19 @@ Stage:
       - ChannelName: train
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/train/
+            S3Uri: s3://xgb-customer-churn-demo/train/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
       - ChannelName: validation
         DataSource:
           S3DataSource:
-            S3Uri: s3://aiml-terraform-states-iday/xgb-customer-churn/validation/
+            S3Uri: s3://xgb-customer-churn-demo/validation/
             S3DataDistributionType: FullyReplicated
             S3DataType: S3Prefix
         CompressionType: None
         InputMode: File
     OutputDataConfig:
-      S3OutputPath: s3://aiml-terraform-states-iday/xgb-customer-churn/output/
+      S3OutputPath: s3://STAGE_ARTIFACT_BUCKET/xgb-customer-churn/output/
   Inference:
     Mode: add
     Version: v3
